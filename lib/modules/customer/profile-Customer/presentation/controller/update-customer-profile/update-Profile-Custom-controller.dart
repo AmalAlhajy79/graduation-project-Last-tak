@@ -32,7 +32,7 @@ class Update_ProfileUserController extends GetxController {
     showLoader();
     _dataState = await handle<void>(() =>
         ProfileUserDataSource.update_user_profile(
-               id: 3, // user_id_Controller.hashCode
+               id: 1, // user_id_Controller.hashCode
                 name: //"amal23",
                nameController.text,
                 email: //"amal23@gmail.com",

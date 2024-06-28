@@ -47,7 +47,7 @@ class AppSubmitButton extends StatelessWidget {
           //     begin: Alignment.bottomLeft,
           //     end: Alignment.topRight
           // ),
-          borderRadius: BorderRadius.circular(7.5.w),
+          borderRadius: BorderRadius.circular(2.5.w),
         ),
 
         alignment: Alignment.center,

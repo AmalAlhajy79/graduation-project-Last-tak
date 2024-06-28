@@ -44,7 +44,7 @@ class ViewMyServicesUserConfApprovedPendingDataSource {
         print(jsonData);
         print("AAAAAAAAAAAAAAAAAAAA");
 
-        var services = MyServicesApproveForUserModel.fromJson(jsonData).pendingServices;
+        var services = MyServicesApproveForUserModel.fromJson(jsonData).approvedServices;
         if (services != null) {
           serviceController.approvedServices.value = services;
         } else {
@@ -64,7 +64,7 @@ class ViewMyServicesUserConfApprovedPendingDataSource {
         print(jsonData);
         print("AAAAAAAAAAAAAAAAAAAA");
 
-        var services = MyServicesConfirmedForUserModel.fromJson(jsonData).pendingServices;
+        var services = MyServicesConfirmedForUserModel.fromJson(jsonData).confirmedServices;//update to confirmedservice
         if (services != null) {
           serviceController.confirmedServices.value = services;
         } else {

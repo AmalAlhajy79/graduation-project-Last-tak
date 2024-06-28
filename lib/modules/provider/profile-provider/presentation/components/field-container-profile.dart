@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:newtes1/core/consts/app_colors.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
+import '../../../../../core/consts/app_colors.dart';
 
 class FieldContainerProfile extends StatelessWidget {
   // const FieldContainerProfile({Key? key}) : super(key: key);

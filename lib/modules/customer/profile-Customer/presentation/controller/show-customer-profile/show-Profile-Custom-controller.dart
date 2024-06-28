@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:tt/modules/customer/profile-Customer/data/models/show-provi-bycustom-profile-model.dart';
+// import 'package:tt/modules/customer/profile-Customer/data/models/show-provider-profile-model.dart';
 //
 // import '../../../../../../core/core_components/pop_up.dart';
 // import '../../../../../../core/data_state/data_state.dart';

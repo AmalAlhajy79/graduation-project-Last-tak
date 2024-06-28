@@ -39,7 +39,9 @@ class CustomerProfile extends GetView<ShowProfileUserController> {
             IconButton(onPressed: () {}, icon: Icon(Icons.notifications_none))
           ],
         ),
-        body: Obx(() => ListView(
+        body:
+        Obx(() =>
+            ListView(
                 padding: EdgeInsets.only(
                   left: 1.w,
                   right: 1.w,
@@ -217,7 +219,8 @@ class CustomerProfile extends GetView<ShowProfileUserController> {
                       ),
                     ],
                   ),
-                ])),
+                ])
+        ),
         bottomNavigationBar: Container(
           height: 15.w,
           decoration: BoxDecoration(

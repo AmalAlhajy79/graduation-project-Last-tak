@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:newtes1/modules/bank/customer-bank/bank-withdraw-user/presentation/screens/withdrawBank-money-User-screen.dart';
 import 'package:newtes1/modules/bank/customer-bank/store-account-user/presentation/screens/store-account-bnak-User-screen.dart';
 import 'package:newtes1/modules/bank/customer-bank/user-deposit/presentation/screens/deposit-money-User-screen.dart';
 import 'package:newtes1/modules/bank/provider-bank/provider-deposit/presentation/screens/deposit-money-Provider-screen.dart';
@@ -9,10 +10,16 @@ import 'package:newtes1/modules/customer/profile-Customer/presentation/screens/p
 import 'package:newtes1/modules/customer/profile-Customer/presentation/screens/store-profile-User-screen.dart';
 import 'core/consts/app_colors.dart';
 import 'core/storage/storage_handler.dart';
+import 'modules/bank/customer-bank/transfer-funds-from-user-to-provider/presentation/screens/TransferFunds-User-screen.dart';
+import 'modules/bank/provider-bank/subscription-payment-provider/presentation/screens/subscription-payment-Provider-screen.dart';
 import 'modules/customer/profile-Customer/presentation/screens/update_profile-user-screen.dart';
 import 'modules/customer/profile-any-Provider-from-service-details/presentation/screens/profile-provider-fromDetails_Screen.dart';
 import 'modules/customer/request-a-service-from-customer/presentation/screens/request-service-from-customer.dart';
 import 'modules/customer/viewMyServices/presentation/screens/view-my-services.dart';
+import 'modules/provider/profile-provider/presentation/screens/profile-provider_Screen.dart';
+import 'modules/provider/profile-provider/presentation/screens/store-profile-Provider-screen.dart';
+import 'modules/provider/profile-provider/presentation/screens/update_profile-provider-screen.dart';
+import 'modules/provider/provider-urgent-request-from-customer/view-All-urgent-request-provider(conf-prend-approve)/presentation/screens/provider-All-request-from-customer_screen.dart';
 
  main()  {
  // await StorageHandler.init();
@@ -39,7 +46,7 @@ class MyApp extends StatelessWidget {
       ),
       //translations: AppTranslation(),
      // locale: StorageHandler().locale,
-        initialRoute: ViewMyServices.name,
+        initialRoute: ProviderProfile.name,
       getPages: [
         CustomerProfile.page,
         AnyProviderProfileFromServiceDetails.page,
@@ -50,26 +57,18 @@ class MyApp extends StatelessWidget {
         StoreAccountProviderScreen.page,
         DepositProviderScreen.page,
         DepositUserScreen.page,
-       // ServicePage.page,
+        WithdrawBankUserScreen.page,
+        TransferFundsUserScreen.page,
+        SubscriptionPaymentProviderScreen.page,
+        ProviderAllUrgentRequestFromCustomerScreen.page,
+        ProviderProfile.page,
+        StoreProviderProfileScreen.page,
+       // Update_ProviderProfileScreen.page,
 
-        // LoginScreen.page,
-        // RegisterScreen.page,
-        // BookInfoScreen.page,
-        // SettingsScreen.page,
-        // SearchFilterScreen.page,
-        // SearchResultScreen.page,
-        // CreateBookScreen.page
+
       ],
 
     );
-    //   MaterialApp(
-    //   title: 'Flutter Demo',
-    //   debugShowCheckedModeBanner: false,
-    //   theme: ThemeData(
-    //     colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-    //     useMaterial3: true,
-    //   ),
-    //   home:ViewMyServices(),//CustomerRequesrService()//NotificationCustomer(),//AnyProviderProfileFromServiceDetails(),//ProviderDetailsMyRequestFromCustomer(),//ProviderAllMyRequestFromCustomer(),//ServicesDetailesAndActiveForProvider(),//CardItem(),////TESTT(),//ProviderServicesViewCallSec(),//CustomerProfile(),//ProviderProfile(), //const MyHomePage(title: 'Amal omar'),
-    // );
+
   }
 }

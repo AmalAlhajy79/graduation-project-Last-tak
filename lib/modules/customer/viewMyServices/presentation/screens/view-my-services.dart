@@ -222,6 +222,7 @@ class ViewMyServices extends StatelessWidget {
                   if (controller.serviceStatus.value == 'pending') {
                     //List<PendingServices> services = [];
                     services = controller.pendingServices;
+
                   } else if (controller.serviceStatus.value == 'approved') {
                     // List<ApprovedServices> services = [];
                     services = controller.approvedServices;
@@ -237,15 +238,18 @@ class ViewMyServices extends StatelessWidget {
                       style: TextStyle(color: AppColors.orange,fontSize: 16,fontWeight: FontWeight.w500),
                     ));
                   }
-                  return ListView.builder(
+                  return
+                    ListView.builder(
                     scrollDirection: Axis.vertical,
 
-                    // padding: EdgeInsets.only(top: 12),
+                    padding: EdgeInsets.only(top: 12),
                     itemCount: services.length,
                     itemBuilder: (context, index) {
                       var service = services[index];
+                      // print(".....................");
+                      // print(service.date);
                       return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 1.2.w),
+                        padding: EdgeInsets.symmetric(vertical: 1.8.w),
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius:
@@ -267,9 +271,11 @@ class ViewMyServices extends StatelessWidget {
                                       topLeft: Radius.circular(11),
                                       bottomLeft: Radius.circular(11)),
                                   child: Image.network(
-                                    'https://th.bing.com/th/id/OIP.FZjYTqwgEaJWUbVVPHcckwHaE8?rs=1&pid=ImgDetMain',
+                                   // 'https://th.bing.com/th/id/OIP.FZjYTqwgEaJWUbVVPHcckwHaE8?rs=1&pid=ImgDetMain',
+                                   'https://th.bing.com/th/id/R.4a4c4b08afbd35cfb25b80022f0552f1?rik=U7fEYx1UqMQbwg&riu=http%3a%2f%2fstatic1.squarespace.com%2fstatic%2f591e0a68414fb5f9f524b604%2f592f082617bffc1a635596ec%2f594d5a851b10e31b57c737aa%2f1542741752981%2fService%2bis%2bService%2bis%2bService%2bpic.jpg%3fformat%3d1500w&ehk=YyuzppgCpkASrI1Cq3Y345luuwkDGiDBfXvzwhvWzW0%3d&risl=&pid=ImgRaw&r=0',
+                                 //  'https://img.freepik.com/premium-photo/male-hand-touching-service-concept_220873-7591.jpg',
                                     // width: 100.w,
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.fill,
                                     //  height: 150,
                                   ),
                                 ),
@@ -303,7 +309,8 @@ class ViewMyServices extends StatelessWidget {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Service Name",
+                                              service.serviceName,
+                                           // service.date , // "Service Name",
                                               style: TextStyle(
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w800,
@@ -371,7 +378,7 @@ class ViewMyServices extends StatelessWidget {
                                               width: 0.4.w,
                                             ),
                                             Text(
-                                              "User Name",
+                                              service.serviceProviderName,// "User Name",
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w800,
                                                   fontSize: 9,
@@ -397,7 +404,7 @@ class ViewMyServices extends StatelessWidget {
                                                     .withOpacity(0.8)),
                                           ),
                                           Text(
-                                            service.address, //"Damascus,Syria",
+                                            service.address,//"Damascus,Syria",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 12,
@@ -422,7 +429,7 @@ class ViewMyServices extends StatelessWidget {
                                                     .withOpacity(0.8)),
                                           ),
                                           Text(
-                                            "0987654321",
+                                            service.serviceProviderNumber,//"0987654321",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 12,
@@ -465,7 +472,7 @@ class ViewMyServices extends StatelessWidget {
                                               width: 22.w,
                                               child: canselButton(
                                                 title: "Cansel",
-                                                heightContainer: 6.w,
+                                                heightContainer: 6.7.w,
                                                 borderRadius: BorderRadius.only(
                                                     bottomRight:
                                                         Radius.circular(12)),

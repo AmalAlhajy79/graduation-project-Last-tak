@@ -13,7 +13,7 @@ class DioNetworkHelper extends NetworkHelper{
     'Content-Type':'application/json',
     'Accept':'application/json',//jYPWm9gOMGISEXJtdsKvrsmq4XAaDYE4OJz7nnPcSwONpE7I6FbptiBldzo4 // for prpvider
                                   //V5LWTlttmXLIaMo91gjzXHPxZGBUDr0R5M4CxtBUjaKqcTWCTN1owwrGyDrc  //for user
-    'Authorization': 'Bearer V5LWTlttmXLIaMo91gjzXHPxZGBUDr0R5M4CxtBUjaKqcTWCTN1owwrGyDrc'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8' //35Rr1OY6VD5imFy4ER0gwexui82UlE50eNGLwiehd9IfVjJUDHh1yWMh0Rgq'
+    'Authorization': 'Bearer jYPWm9gOMGISEXJtdsKvrsmq4XAaDYE4OJz7nnPcSwONpE7I6FbptiBldzo4'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8' //35Rr1OY6VD5imFy4ER0gwexui82UlE50eNGLwiehd9IfVjJUDHh1yWMh0Rgq'
     //   if(StorageHandler().hasToken)
   //     'Authorization': 'Bearer ${StorageHandler().token}'
  };

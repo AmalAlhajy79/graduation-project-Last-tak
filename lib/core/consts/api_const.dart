@@ -1,8 +1,16 @@
 class ApiConst {
-  static const _baseUrl = 'http://127.0.0.1:8001/api';//'http://192.168.43.31:8001/api'; //'http://127.0.0.1:8001/api';
+  static const _baseUrl = 'http://192.168.43.31:8001/api';//'http://192.168.43.31:8001/api'; //'http://127.0.0.1:8001/api';
 
   static const userProfile = '$_baseUrl/profiles';
   static const storeuserProfile = '$userProfile';
+
+  static String provider_showAllUrgentRequestPending ='$_baseUrl/call-response/urgent-requsets';
+
+  static String provider_showAllUrgentRequestApproved ='$_baseUrl/call-response/approved-services';
+
+  static String provider_showAllUrgentRequestConfirmed ='$_baseUrl/call-response/provider/confirmedservices';
+
+  static String storeproviderProfile = '$_baseUrl/profiles/store';
 
   static String destroyuserProfile(int id) => '$userProfile/$id';
 
@@ -31,7 +39,22 @@ class ApiConst {
       '$_baseUrl/provider-deposit?provider_id=$provider_id&amount=$amount';
 
   static String depositUsernew(int user_id, int amount) =>
-      '$_baseUrl/bank/deposit?user_id=$user_id&amount=$amount';//'$_baseUrl/bank/deposit?user_id=1&amount=10';//
+      '$_baseUrl/bank/deposit?user_id=$user_id&amount=$amount';
+
+  static String withdrawBankUsernew(int user_id, int amount) =>
+      '$_baseUrl/bank/withdraw?amount=$amount&user_id=$user_id';
+
+  static String transferFundsBankUsernew(int user_id, int provider_id, int amount, int service_id) =>
+      '$_baseUrl/transfer-funds?user_id=$user_id&provider_id=$provider_id&amount=$amount&service_id=$service_id';
+
+  static String subscription_paymentProvidernew(String token, String email, String password) =>
+      '$_baseUrl/bank/subscription-payment?token=jYPWm9gOMGISEXJtdsKvrsmq4XAaDYE4OJz7nnPcSwONpE7I6FbptiBldzo4&email=j$email&password=$password';
+
+  static String show_providerProfile(int i) =>'$_baseUrl/profiles/show/$i';
+
+  static String updateproviderProfile(int i) =>'$_baseUrl/profiles/update/$i';
+
+  static String destroyproviderProfile(int id) =>'$_baseUrl/profiles/destroy/$id';
 
 //
   // static const login = '$_baseUrl/auth/login';
