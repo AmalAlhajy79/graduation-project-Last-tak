@@ -10,9 +10,10 @@ import '../../../../../core/core_components/delete-button.dart';
 import '../../../../customer/profile-any-Provider-from-service-details/presentation/controller/sho-prof-provider-by-user-controller.dart';
 import '../../../../customer/profile-any-Provider-from-service-details/presentation/controller/show-Profile-provider-by-Custom-binding.dart';
 import '../components/field-container-profile.dart';
+import '../controller/show-provider-profile/sho-prof-provider-controller.dart';
 import '../controller/show-provider-profile/show-Profile-provider-binding.dart';
 
-class ProviderProfile extends GetView<ShowProfileProviderByCustomController> {
+class ProviderProfile extends GetView<ShowProfileProviderController> {
   const ProviderProfile({Key? key}) : super(key: key);
 
   static const name = '/providerProfile';

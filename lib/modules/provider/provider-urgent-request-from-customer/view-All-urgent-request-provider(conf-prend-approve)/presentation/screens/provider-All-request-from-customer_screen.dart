@@ -8,6 +8,7 @@ import 'package:newtes1/core/core_components/app_scaffold.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
 import '../../../../../../core/consts/app_colors.dart';
 import '../../../../../../core/core_components/button-Req-Serv.dart';
+import '../../../provider-view-details-request-from-customer/presentation/screens/provider-detailes-request-from-customer.dart';
 import '../controller/show-All-Urgent_request-controller.dart';
 import '../controller/show-All-Urgent_request-pinding.dart';
 
@@ -228,7 +229,8 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
               child: Container(
                 height: 104.6.w,
                 width: 95.w,
-                child:Obx(() {
+                child:
+                Obx(() {
     var services = [];
     if (controller.serviceStatus.value == 'pending') {
     //List<PendingServices> services = [];
@@ -258,126 +260,134 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
                   itemCount:  services.length,
                   itemBuilder: (context, index) {
                     var service = services[index];
-                    return Column(
-                      children: [
-                        ListTile(
-                          title:Text(service.serviceName), //Text('Request Title'),
-                          titleTextStyle: TextStyle(
-                              fontSize: 15.3,
-                              fontWeight: FontWeight.bold,
-                              color:Colors.black87.withOpacity(0.7)), //Colors.black87.withOpacity(0.7)),
-                          subtitle:
-                          Text('${service.note}'
+                    return InkWell(
+                      onTap: (){
+                        Get.toNamed(ProviderDetailsMyRequestFromCustomer.name);
+                      },
+                      child:  Column(
+                        children: [
+                          ListTile(
+                            title:Text(service.serviceName), //Text('Request Title'),
+                            titleTextStyle: TextStyle(
+                                fontSize: 15.3,
+                                fontWeight: FontWeight.bold,
+                                color:Colors.black87.withOpacity(0.7)), //Colors.black87.withOpacity(0.7)),
+                            subtitle:
+                            Text('${service.note}'
 
-                             // 'nice nice nice nice nice d nice nice nice nice nice nice nice nice nice d nice nice nice nice  nice nice nice. '
+                              // 'nice nice nice nice nice d nice nice nice nice nice nice nice nice nice d nice nice nice nice  nice nice nice. '
+                            ),
+                            subtitleTextStyle: TextStyle(
+                                height: 1.5,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 11,
+                                color: Colors.black87.withOpacity(0.6)),
                           ),
-                          subtitleTextStyle: TextStyle(
-                              height: 1.5,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 11,
-                              color: Colors.black87.withOpacity(0.6)),
-                        ),
-                        SizedBox(
-                          height: 0.3.w,
-                        ),
-                        Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "      requeste Date : ",
-                              style: TextStyle(
-                                  fontSize: 10.2,
-                                  fontWeight: FontWeight.w800,
-                                  color: AppColors.orange
-                                      .withOpacity(0.8)),
-                            ),
-                            Text(
-                              service.requestedDate, //"12/12/2023",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 10.2,
-                                  color: Colors.black87
-                                      .withOpacity(0.4)),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 0.8.w,
-                        ),
-
-                        Padding(
-                          padding:  EdgeInsets.only(right:4.w,left: 4.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          SizedBox(
+                            height: 0.3.w,
+                          ),
+                          Row(
+                            mainAxisAlignment:
+                            MainAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                width: 25.w,
-                                child: ButtonReqServic(
-                                  title: "Delete",
-                                  colorContainer: AppColors.red,
-                                  colorTextStyle: AppColors.white,
-                                  fontSizeText: 9.4,
-                                  fontWeightText: FontWeight.w400,
-                                  heightContainer: 6.8.w,
-                                  borderRadius: BorderRadius.circular(8),
-                                  // weightContainer: 20.w,
-                                  onTap: () {},
-                                ),
+                              Text(
+                                "      requeste Date : ",
+                                style: TextStyle(
+                                    fontSize: 10.2,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppColors.orange
+                                        .withOpacity(0.8)),
                               ),
-                              SizedBox(
-                                width: 27.8.w,
-                                child: ButtonReqServic(
-                                  title: "Approve By QR",
-                                  colorContainer: AppColors.green.withAlpha(1500),
-                                  colorTextStyle: AppColors.white,
-                                  fontSizeText: 9.4,
-                                  fontWeightText: FontWeight.w400,
-                                  heightContainer: 6.8.w,
-                                  borderRadius: BorderRadius.circular(8),
-                                  // weightContainer: 20.w,
-                                  gradient: LinearGradient(
-                                      colors: [
-                                        //   AppColors.green.withAlpha(1500),
-                                        AppColors.green.withOpacity(0.6),
-                                        AppColors.green.withAlpha(1500),
-                                        AppColors.cyan.withAlpha(680),
-                                        // AppColors.cyan.withAlpha(620)
-                                      ],
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight),
-                                  onTap: () {},
-                                ),
-                              ),
-                              SizedBox(
-                                width: 26.w - 1,
-                                child: ButtonReqServic(
-                                  title: "Approve",
-                                  colorContainer: AppColors.green.withAlpha(1500),
-                                  colorTextStyle: AppColors.white,
-                                  fontSizeText: 9.4,
-                                  fontWeightText: FontWeight.w400,
-                                  heightContainer: 6.8.w,
-                                  borderRadius: BorderRadius.circular(8),
-                                  // weightContainer: 20.w,
-                                  gradient: LinearGradient(
-                                      colors: [
-                                        //   AppColors.green.withAlpha(1500),
-                                        AppColors.green,
-                                        AppColors.green.withAlpha(1500),
-                                        AppColors.cyan.withAlpha(680),
-                                        // AppColors.cyan.withAlpha(620)
-                                      ],
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight),
-                                  onTap: () {},
-                                ),
+                              Text(
+                                service.requestedDate, //"12/12/2023",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 10.2,
+                                    color: Colors.black87
+                                        .withOpacity(0.4)),
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 0.8.w,
+                          ),
+
+                          Padding(
+                            padding:  EdgeInsets.only(right:4.w,left: 4.w),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                SizedBox(
+                                  width: 25.w,
+                                  child: ButtonReqServic(
+                                    title: "Delete",
+                                    colorContainer: AppColors.red,
+                                    colorTextStyle: AppColors.white,
+                                    fontSizeText: 9.4,
+                                    fontWeightText: FontWeight.w400,
+                                    heightContainer: 6.8.w,
+                                    borderRadius: BorderRadius.circular(8),
+                                    // weightContainer: 20.w,
+                                    onTap: () {
+                                      controller.cancelReservation_InProvider(service.id);
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 27.8.w,
+                                  child: ButtonReqServic(
+                                    title: "Approve By QR",
+                                    colorContainer: AppColors.green.withAlpha(1500),
+                                    colorTextStyle: AppColors.white,
+                                    fontSizeText: 9.4,
+                                    fontWeightText: FontWeight.w400,
+                                    heightContainer: 6.8.w,
+                                    borderRadius: BorderRadius.circular(8),
+                                    // weightContainer: 20.w,
+                                    gradient: LinearGradient(
+                                        colors: [
+                                          //   AppColors.green.withAlpha(1500),
+                                          AppColors.green.withOpacity(0.6),
+                                          AppColors.green.withAlpha(1500),
+                                          AppColors.cyan.withAlpha(680),
+                                          // AppColors.cyan.withAlpha(620)
+                                        ],
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight),
+                                    onTap: () {},
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 26.w - 1,
+                                  child: ButtonReqServic(
+                                    title: "Approve",
+                                    colorContainer: AppColors.green.withAlpha(1500),
+                                    colorTextStyle: AppColors.white,
+                                    fontSizeText: 9.4,
+                                    fontWeightText: FontWeight.w400,
+                                    heightContainer: 6.8.w,
+                                    borderRadius: BorderRadius.circular(8),
+                                    // weightContainer: 20.w,
+                                    gradient: LinearGradient(
+                                        colors: [
+                                          //   AppColors.green.withAlpha(1500),
+                                          AppColors.green,
+                                          AppColors.green.withAlpha(1500),
+                                          AppColors.cyan.withAlpha(680),
+                                          // AppColors.cyan.withAlpha(620)
+                                        ],
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight),
+                                    onTap: () {},
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     );
+
                   },
                 );
                 }),

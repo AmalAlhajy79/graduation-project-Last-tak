@@ -14,11 +14,12 @@ import 'modules/bank/customer-bank/transfer-funds-from-user-to-provider/presenta
 import 'modules/bank/provider-bank/subscription-payment-provider/presentation/screens/subscription-payment-Provider-screen.dart';
 import 'modules/customer/profile-Customer/presentation/screens/update_profile-user-screen.dart';
 import 'modules/customer/profile-any-Provider-from-service-details/presentation/screens/profile-provider-fromDetails_Screen.dart';
-import 'modules/customer/request-a-service-from-customer/presentation/screens/request-service-from-customer.dart';
+import 'modules/customer/request-a-service-from-customer/presentation/screens/Customer-SendRequest-Urgent-secreen.dart';
 import 'modules/customer/viewMyServices/presentation/screens/view-my-services.dart';
 import 'modules/provider/profile-provider/presentation/screens/profile-provider_Screen.dart';
 import 'modules/provider/profile-provider/presentation/screens/store-profile-Provider-screen.dart';
 import 'modules/provider/profile-provider/presentation/screens/update_profile-provider-screen.dart';
+import 'modules/provider/provider-urgent-request-from-customer/provider-view-details-request-from-customer/presentation/screens/provider-detailes-request-from-customer.dart';
 import 'modules/provider/provider-urgent-request-from-customer/view-All-urgent-request-provider(conf-prend-approve)/presentation/screens/provider-All-request-from-customer_screen.dart';
 
  main()  {
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
       ),
       //translations: AppTranslation(),
      // locale: StorageHandler().locale,
-        initialRoute: ProviderProfile.name,
+        initialRoute: CustomerSendRequestUrgent.name,
       getPages: [
         CustomerProfile.page,
         AnyProviderProfileFromServiceDetails.page,
@@ -63,7 +64,9 @@ class MyApp extends StatelessWidget {
         ProviderAllUrgentRequestFromCustomerScreen.page,
         ProviderProfile.page,
         StoreProviderProfileScreen.page,
-       // Update_ProviderProfileScreen.page,
+        ProviderDetailsMyRequestFromCustomer.page,
+       Update_ProviderProfileScreen.page,
+        CustomerSendRequestUrgent.page,
 
 
       ],

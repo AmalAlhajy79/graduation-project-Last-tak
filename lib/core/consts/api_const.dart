@@ -11,6 +11,7 @@ class ApiConst {
   static String provider_showAllUrgentRequestConfirmed ='$_baseUrl/call-response/provider/confirmedservices';
 
   static String storeproviderProfile = '$_baseUrl/profiles/store';
+  static String provider_showDetailsUrgentRequestPending(int id) =>'$_baseUrl/call-response/requsets/$id';
 
   static String destroyuserProfile(int id) => '$userProfile/$id';
 
@@ -55,6 +56,19 @@ class ApiConst {
   static String updateproviderProfile(int i) =>'$_baseUrl/profiles/update/$i';
 
   static String destroyproviderProfile(int id) =>'$_baseUrl/profiles/destroy/$id';
+
+  static String provider_showDetailsUrgentRequestApproved(int i) =>'$_baseUrl/call-response/requsets/$i';
+
+  static String provider_showDetailsUrgentRequestConfirmed(int i) =>'$_baseUrl/call-response/requsets/$i';
+
+
+
+  static String CancelReservationProviderMyServices(int id) => '$_baseUrl/refuse-request/$id';
+
+
+
+
+
 
 //
   // static const login = '$_baseUrl/auth/login';

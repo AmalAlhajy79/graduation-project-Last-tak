@@ -1,15 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:newtes1/core/consts/app_assets.dart';
 import 'package:newtes1/core/consts/app_colors.dart';
 import 'package:newtes1/core/core_components/app_scaffold.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
 import '../../../../../core/core_components/button-Req-Serv.dart';
 import '../../../../../core/core_components/delete-button.dart';
-import '../../../../provider/profile-provider/presentation/components/field-container-profile.dart';
+import '../components/card-service.dart';
+import '../components/send-button.dart';
+import '../components/sendButton-ToAll-Providers.dart';
+import '../controller/Customer-SendRequest-Urgent-pinding.dart';
 
-class CustomerRequesrService extends StatelessWidget {
-  CustomerRequesrService({Key? key}) : super(key: key);
+class CustomerSendRequestUrgent extends StatelessWidget {
+  CustomerSendRequestUrgent({Key? key}) : super(key: key);
+
+  static const name = '/customerSendRequestUrgent';
+  static final page = GetPage(
+      name: name,
+      page: () => CustomerSendRequestUrgent(),
+      binding: CustomerSendRequestUrgentControllerBinding()
+  );
 
   String userName = '';
   TimeOfDay selectedTime = TimeOfDay.now();
@@ -51,66 +62,9 @@ class CustomerRequesrService extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 1.w, right: 1.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 9.9.w,
-                          width: 64.w,
-                          child: TextField(
-                            decoration: InputDecoration(
-                                fillColor: AppColors.greyfield.withAlpha(27),
-                                filled: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(2.5.w),
-                                ),
-                                hintText: 'search',
-                                hintStyle: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.black45),
-                                prefixIcon: const Icon(
-                                  CupertinoIcons.search,
-                                  size: 14,
-                                  color: AppColors.greyfield,
-                                )),
-                            //   controller:// controller.searchBoxController,
-                            // //  textInputAction: TextInputAction.search,
-                            //  onEditingComplete: controller.showSearchResult
-                          ),
-                        ),
-                        SizedBox(
-                          width: 1.w,
-                        ),
-                        SizedBox(
-                          width: 25.w,
-                          child: ButtonReqServic(
-                            title: "Heed the call",
-                            colorContainer: AppColors.green.withAlpha(1500),
-                            colorTextStyle: AppColors.white,
-                            fontSizeText: 11.6,
-                            fontWeightText: FontWeight.w500,
-                            heightContainer: 9.5.w,
-                            borderRadius: BorderRadius.circular(8),
-                            // weightContainer: 20.w,
-                            gradient: LinearGradient(colors: [
-                              //   AppColors.green.withAlpha(1500),
-                              AppColors.green.withOpacity(0.6),
-                              AppColors.green.withAlpha(1500),
-                              AppColors.cyan.withAlpha(680),
-                              // AppColors.cyan.withAlpha(620)
-                            ], begin: Alignment.bottomLeft, end: Alignment.topRight),
-                            onTap: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+
                   SizedBox(
-                    height: 20,
+                    height: 15,
                   ),
                   Padding(
                     padding: EdgeInsets.only(
@@ -121,7 +75,7 @@ class CustomerRequesrService extends StatelessWidget {
                       children: [
                         Icon(Icons.arrow_back_sharp, color: AppColors.green),
                         Text(
-                          " Request a service",
+                          " Urgent Request",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18),
                         )
@@ -149,7 +103,14 @@ class CustomerRequesrService extends StatelessWidget {
                               child: TextField(
                                 decoration: InputDecoration(
                                 //  border: InputBorder.none,
-                                  hintText: 'Enter your address',
+                                  hintText: 'Chose Section',
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_drop_down,
+                                      color: AppColors.green,
+                                    ),
+                                    onPressed: () {},
+                                  ),
                                   hintStyle: TextStyle(
                                       color: Colors.black87.withOpacity(0.5),
                                       fontSize: 13.5,
@@ -174,14 +135,14 @@ class CustomerRequesrService extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 10,
+                              height: 1.w,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextField(
                                 decoration: InputDecoration(
                                    // border: InputBorder.none,
-                                    hintText: 'Chose time',
+                                    hintText: 'Chose SubSection',
                                     hintStyle: TextStyle(
                                         color: Colors.black87.withOpacity(0.5),
                                         fontSize: 13.5,
@@ -201,11 +162,12 @@ class CustomerRequesrService extends StatelessWidget {
                                         horizontal: 16.0, vertical: 12.0),
                                     suffixIcon: IconButton(
                                       icon: Icon(
-                                        Icons.date_range_outlined,
-                                        color: Colors.black87,
+                                        Icons.arrow_drop_down,
+                                        color: AppColors.green,
                                       ),
                                       onPressed: () {},
-                                    )),
+                                    ),
+                                ),
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16.0,
@@ -213,45 +175,67 @@ class CustomerRequesrService extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: 13,
+                              height: 6.w,
                             ),
-                            Center(
-                                child: Text(
-                              "Or",
-                              style: TextStyle(
-                                  color: Colors.black87.withOpacity(0.8),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
-                            )),
+
                             Padding(
-                              padding: EdgeInsets.only(right: 5.1.w, left: 3.w),
+                              padding: EdgeInsets.only(right: 5.w, left:4.4.w),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
-                                    height: 5.3.w,
-                                    width: 6.3.w,
-                                    decoration: BoxDecoration(
-                                      color: Colors.blueGrey.withAlpha(100),
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
-                                    child: Icon(
-                                      Icons.check,
-                                      color: AppColors.white,
-                                      size: 21,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 3.w,
-                                  ),
+
                                   Text(
-                                    "Current time",
+                                    "Available people",
                                     style: TextStyle(
-                                        color: Colors.black87.withOpacity(0.8),
+                                        color: AppColors.green,
                                         fontSize: 14,
-                                        fontWeight: FontWeight.w500),
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      SendButtonToAllProviders(
+                                        title: "  Send to all providers  ",
+                                        fontSizeText: 12,
+                                        fontWeightText: FontWeight.w500,
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(5),
+                                          bottomRight: Radius.circular(5),
+                                          topLeft:  Radius.circular(5),
+                                          topRight:  Radius.circular(5),
+                                        ),
+                                        onTap: () {},
+                                        heightContainer: 9.w,
+                                        colorContainer: AppColors.orange.withAlpha(240),
+
+                                      ),
+                                    ],
                                   ),
                                 ],
+                              ),
+                            ),
+                          //  SizedBox(height: 0.1.w,),
+
+                            SizedBox(height: 6.w,),
+                            Padding(
+                              padding: EdgeInsets.only(right: 3.w,left: 3.w),
+                              child: Container(
+                                height: 104.6.w,
+                                width: 95.w,
+                                child: GridView.builder(
+                                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                                    childAspectRatio: 1.0,
+                                    mainAxisSpacing: 14,
+                                    crossAxisSpacing: 14,
+                                    maxCrossAxisExtent: 100.w/2,
+                                  ),
+                                  itemCount:6,
+                                  itemBuilder: (context,index){
+                                    return CardService();
+
+                                  },
+
+                                ),
                               ),
                             ),
                           ],

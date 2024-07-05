@@ -76,9 +76,9 @@ class ViewAllUrgentRequestFromCustomerForProviderDataSource {
       }
     }
   }
-  Future<void> cancelReservation(int id, String reason) async {
+  Future<void> cancelReservation(int id) async {
     // final url = 'http://192.168.43.31:8001/api/reservations/$id/cancel?reason=$reason&status=cancelled';
-    final response = await NetworkHelper().post(ApiConst.CancelReservationUserMyServices(id, reason));
+    final response = await NetworkHelper().post(ApiConst.CancelReservationProviderMyServices(id));
 
     if (response.statusCode == 200) {
 

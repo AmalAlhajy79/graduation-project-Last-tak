@@ -40,8 +40,8 @@ class ProviderAllUrgentRequestFromCustomerController extends GetxController {
     await ViewAllUrgentRequestFromCustomerForProviderDataSource(this).fetchAllRequest();
   }
 
-  Future<void> cancelReservation(int id, String reason) async {
-    await ViewAllUrgentRequestFromCustomerForProviderDataSource(this).cancelReservation(id, reason);
+  Future<void> cancelReservation_InProvider(int id) async {
+    await ViewAllUrgentRequestFromCustomerForProviderDataSource(this).cancelReservation(id);
   }
 
 }

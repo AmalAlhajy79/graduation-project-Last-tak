@@ -1,16 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:newtes1/core/core_components/app_scaffold.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
 import '../../../../../../core/consts/app_colors.dart';
 import '../../../../../../core/core_components/button-Req-Serv.dart';
+import '../controller/provider-details-request-controller.dart';
+import '../controller/provider-details-request-pinding.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+import 'package:intl/intl.dart';
+
 
 class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
-  const ProviderDetailsMyRequestFromCustomer({Key? key}) : super(key: key);
+   ProviderDetailsMyRequestFromCustomer({Key? key}) : super(key: key);
 
-  @override
+  static const name = '/providerDetailsMyRequestFromCustomer';
+  static final page = GetPage(
+      name: name,
+      page: () => ProviderDetailsMyRequestFromCustomer(),
+      binding: ProviderDetailsRequestBinding()
+  );
+  final ProviderDetailsRequestController controller = Get.put(ProviderDetailsRequestController());
+
+
+
+
+   @override
   Widget build(BuildContext context) {
     var _selectedIndex = 0;
+    initializeDateFormatting();
+
     return AppScaffold(
       drawer: Drawer(),
       appBar: AppBar(
@@ -29,34 +51,7 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
       body: ListView(children: [
         Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 5.w, right: 5.w),
-              child: Container(
-                height: 40,
-                child: TextField(
-                  decoration: InputDecoration(
-                      fillColor: AppColors.greyfield.withAlpha(27),
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(2.5.w),
-                      ),
-                      hintText: 'search',
-                      hintStyle: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black45),
-                      prefixIcon: Icon(
-                        CupertinoIcons.search,
-                        size: 14,
-                        color: AppColors.greyfield,
-                      )),
-                  //   controller:// controller.searchBoxController,
-                  // //  textInputAction: TextInputAction.search,
-                  //  onEditingComplete: controller.showSearchResult
-                ),
-              ),
-            ),
+
             SizedBox(
               height: 13,
             ),
@@ -160,7 +155,9 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                                   ],
                                   begin: Alignment.bottomLeft,
                                   end: Alignment.topRight),
-                              onTap: () {},
+                              onTap: () {
+                                controller.setRequestStatus('pending');
+                              },
                             ),
                           ),
                         ),
@@ -174,7 +171,9 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                             fontWeightText: FontWeight.w500,
                             heightContainer: 10.2.w,
                             weightContainer: 50.w,
-                            onTap: () {},
+                            onTap: () {
+                              controller.setRequestStatus('confirmed');
+                            },
                           ),
                         ),
                         Padding(
@@ -190,7 +189,9 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                               fontWeightText: FontWeight.w500,
                               heightContainer: 10.2.w,
                               weightContainer: 50.w,
-                              onTap: () {},
+                              onTap: () {
+                                controller.setRequestStatus('approved');
+                                },
                             ),
                           ),
                         ),
@@ -209,16 +210,44 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
               child: Container(
                 height: 104.6.w,
                 width: 95.w,
-                child: Column(
+                child:
+                Obx(() {
+    var services;
+    if (controller.serviceStatus.value == 'pending') {
+    //List<PendingServices> services = [];
+    services = controller.requestDetailsPending.value  ;
+    print("......................");
+    print(services.serviceName);
+
+    } else if (controller.serviceStatus.value == 'approved') {
+    // List<ApprovedServices> services = [];
+    services = controller.requestDetailsApproved.value ;
+    } else if (controller.serviceStatus.value == 'confirmed') {
+    //  List<ConfirmedServices> services = [];
+    services = controller.requestDetailsConfermed.value ;
+    }
+
+    if (services == null) {
+    return Center(
+    child: Text(
+    "No Request available",
+    style: TextStyle(color: AppColors.orange,fontSize: 16,fontWeight: FontWeight.w500),
+    ));
+    }
+
+    return
+    Column(
                   children: [
                     ListTile(
-                      title: Text('Request Title'),
+                      title: Text(services.serviceName),//'Request Title'),
                       titleTextStyle: TextStyle(
                           fontSize: 15.3,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87.withOpacity(0.7)),
                       subtitle: Text(
-                          'nice nice nice nice nice nice nice nice d nice nice nice nice nice nice d nice nice nice d nice nice nice nice nice nice d nice nice nice nice nice nice d nice nice nice nice nice nice nice nice nice d nice nice nice nice  nice nice nice. '),
+                  services.note,
+                  //'nice nice nice nice nice nice nice nice d nice nice nice nice nice nice d nice nice nice d nice nice nice nice nice nice d nice nice nice nice nice nice d nice nice nice nice nice nice nice nice nice d nice nice nice nice  nice nice nice.
+                 ),
                       subtitleTextStyle: TextStyle(
                           height: 1.5,
                           fontWeight: FontWeight.w400,
@@ -260,7 +289,7 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                                 width: 0.5.w,
                               ),
                               Text(
-                                "User Name",
+                                  services.userName, //"User Name",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 9,
@@ -282,7 +311,7 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                                     color: Colors.black87.withOpacity(0.7)),
                               ),
                               Text(
-                                "Damascus,Syria",
+                                services.userAddress, //"Damascus,Syria",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12,
@@ -304,7 +333,7 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                                     color: Colors.black87.withOpacity(0.7)),
                               ),
                               Text(
-                                "0987654321",
+                                services.userPhone,//"0987654321",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12,
@@ -326,7 +355,7 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                                     color: Colors.black87.withOpacity(0.7)),
                               ),
                               Text(
-                                "12/12/2023",
+                                services.requestedDate, //"12/12/2023",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12,
@@ -334,6 +363,49 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 2.w,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Time: ",
+                                style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black87.withOpacity(0.7)),
+                              ),
+                              Text(  (() {
+                                try {
+                                 // final parsedDate = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parseUtc(services.requestedTime);
+                                  final formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.parse(services.requestedTime).toLocal());
+                                  print(formattedDate);
+                                  print('rrrrrrr');
+                                  return formattedDate;
+                                } catch (e) {
+                                  print('Error parsing date: $e');
+                                  return 'Invalid Date';
+                                }
+                              })(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                    color: Colors.black87.withOpacity(0.5)),
+                              )
+
+
+                              // Text(
+                              //   DateTime.parse(services.requestedTime).toString(), //"12/12/2023",
+                              //   style: TextStyle(
+                              //       fontWeight: FontWeight.w500,
+                              //       fontSize: 12,
+                              //       color: Colors.black87.withOpacity(0.5)),
+                              // ),
+                            ],
+                          ),
+
+
                         ],
                       ),
                     ),
@@ -627,7 +699,8 @@ class ProviderDetailsMyRequestFromCustomer extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
+                );
+                }),
               ),
             ),
           ],
