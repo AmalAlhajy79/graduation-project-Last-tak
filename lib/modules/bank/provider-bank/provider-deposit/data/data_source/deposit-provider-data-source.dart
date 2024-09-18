@@ -10,10 +10,10 @@ import '../../../../../../core/network/network_helper.dart';
 class depositProviderDataSource{
 
 
-  Future<void> depositProvidernew(int provider_id,int amount) async {
+  Future<void> depositProvidernew(int amount) async {
 print("......url...........");
-print(ApiConst.depositProviderrnew(provider_id,amount));
-    final response = await NetworkHelper().post(ApiConst.depositProviderrnew(provider_id,amount));
+print(ApiConst.depositProviderrnew(amount));
+    final response = await NetworkHelper().post(ApiConst.depositProviderrnew(amount));
 
     if (response.statusCode == 200) {
 

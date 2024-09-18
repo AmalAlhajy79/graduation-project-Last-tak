@@ -13,7 +13,7 @@ class SubscriptionPaymentProviderController extends GetxController {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-   final token=''; // update here .................
+   final token='kYrje6eSKuRmhUGDNKKpgUn3pQKSjCbqOfn3pdwjcIeFbOk3fmhS68pYJRSz'; // update here .................
 
   DataState<void> _dataState = DataState<void>();
 

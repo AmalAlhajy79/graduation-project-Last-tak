@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:newtes1/core/consts/app_assets.dart';
 import 'package:newtes1/core/consts/app_colors.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
 import 'package:newtes1/modules/customer/request-a-service-from-customer/presentation/components/send-button.dart';
+import 'dart:io';
+import '../controller/Customer-SendRequest-Urgent-controller.dart';
+import 'dialog-note-toSendRequest-toProvider.dart';
 
 class CardService extends StatelessWidget {
-  const CardService({Key? key}) : super(key: key);
+  var index = 0;
+  int id_prov=0;
+  CardService(int index,int id_prov) {
+    this.index = index;
+    this.id_prov=id_prov;
+  }
+
+  final ClassificationController controller =
+      Get.put(ClassificationController());
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +55,23 @@ class CardService extends StatelessWidget {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
+                              // Container(
+                              //   height: 20,
+                              //   width: 20,
+                              //   child: Image.file(
+                              //     File(
+                              //         "${controller.data[index].profileImage}"),
+                              //     fit: BoxFit.cover,
+                              //   ),
+                              // ),
                               SizedBox(
                                 child: CircleAvatar(
-                                  maxRadius: 14,
-                                  backgroundColor: Colors.grey.shade500,
-                                  child: Icon(
+                                maxRadius: 14,
+                                 backgroundColor: AppColors.orange,
+
+                                  child: //Image.asset("${controller.data[index].profileImage}",fit: BoxFit.cover),
+
+                                  Icon(
                                     Icons.person,
                                     color: Colors.white,
                                     size: 27,
@@ -57,27 +82,59 @@ class CardService extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "Provider Name",
+                                controller.data[index].name, //"Provider Name",
                                 //"User Name",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w500, fontSize: 12),
+                                    fontWeight: FontWeight.w600, fontSize: 12),
                               ),
+
                             ]),
                       ),
                     ),
                     SizedBox(
-                      height: 2.5.w,
+                      height: 0.5.w,
                     ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Service Name",
+                        Text('Service name :',
+                            //"Service Name",
                             style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 13)),
+                                fontWeight: FontWeight.w600, fontSize: 10.5,color: AppColors.green)),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+
+                        Text('${controller.data[index].serviceName}',
+                            //"Service Name",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 9))
                       ],
                     ),
                     SizedBox(
-                      height: 9.5.w,
+                      height: 1,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('Phone number :',
+                            //"Service Name",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 10.5,color: AppColors.green)),
+
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                      Text('${controller.data[index].phoneNumber}',
+                          //"Service Name",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 9)),
+                    ],),
+                    SizedBox(
+                      height: 0.5.w,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -88,8 +145,9 @@ class CardService extends StatelessWidget {
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(9),
                               bottomRight: Radius.circular(9)),
-                          onTap: () {},
-
+                          onTap: () {
+                            showDialogNoteToSendRequestToProvider(context,id_prov);
+                          },
                         )),
                       ],
                     ),

@@ -6,6 +6,7 @@ import '../../../../../../core/data_state/data_state.dart';
 import '../../../../../../core/handler/handler.dart';
 import '../../../../../customer/profile-Customer/data/data_source/profile-user-data-source.dart';
 import '../../../data/data_source/profile-provider-data-source.dart';
+import '../../screens/profile-provider_Screen.dart';
 
 class StoreProfileProviderController extends GetxController {
 
@@ -44,7 +45,7 @@ class StoreProfileProviderController extends GetxController {
     _dataState = await handle<void>(
             () =>
             ProfileProviderDataSource.store_provider_profile(
-                provider_id:1, //user_id_Controller.hashCode,
+               // provider_id:1, //user_id_Controller.hashCode,
                 name:nameController.text,
                 email: emailController.text,
                 phone_number:phoneController.text,
@@ -55,8 +56,9 @@ class StoreProfileProviderController extends GetxController {
     print(status);
     print('.............success..........');
 
+    Get.toNamed(ProviderProfile.name);
 
-    Get.back();
+    // Get.back();
     if(status == DataStatus.error){
       print("....... status 4 in screen store profile .......");
       print(status);
@@ -66,8 +68,7 @@ class StoreProfileProviderController extends GetxController {
     }
     else{
       print("True .... Get.to(CustomerProfile());. from StorCustomerprofile....");
-      //Get.to(CustomerProfile());
-    //Get.offAllNamed(BooksScreen.name);
+
     }
   }
 

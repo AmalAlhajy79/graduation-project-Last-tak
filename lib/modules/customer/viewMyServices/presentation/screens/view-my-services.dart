@@ -246,8 +246,9 @@ class ViewMyServices extends StatelessWidget {
                     itemCount: services.length,
                     itemBuilder: (context, index) {
                       var service = services[index];
-                      // print(".....................");
-                      // print(service.date);
+                      print(".....................");
+                      print(service.date);
+                      print(service.id);
                       return Padding(
                         padding: EdgeInsets.symmetric(vertical: 1.8.w),
                         child: Container(
@@ -477,6 +478,8 @@ class ViewMyServices extends StatelessWidget {
                                                     bottomRight:
                                                         Radius.circular(12)),
                                                 onTap: () {
+                                                  print("....service id");
+                                                 print(service.id);
                                                   showCancelDialog(
                                                       context, service.id);
                                                 },

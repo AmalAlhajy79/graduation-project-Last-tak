@@ -31,7 +31,7 @@ class ProfileProviderDataSource{
   }
 
   static Future<void> store_provider_profile({
-    required int provider_id,
+    //required int provider_id,
     required String name,
     required String email,
     required String phone_number,
@@ -42,7 +42,7 @@ class ProfileProviderDataSource{
     var response = await NetworkHelper().post(
         ApiConst.storeproviderProfile,
         body: {
-          'provider_id': provider_id,
+        //  'provider_id': provider_id,
           'name': name,
           'email': email,
           'phone_number': phone_number,
@@ -64,24 +64,30 @@ class ProfileProviderDataSource{
     required String email,
     required String phone_number,
     required String address,
-    required String? profile_image
+     String? profile_image
   })
   async{
-    var response = await NetworkHelper().post(
-        ApiConst.updateproviderProfile(id),
-        body: {
-          'name': name,
-          'email': email,
-          'phone_number': phone_number,
-          'address': address
-        },
+    print(id);
+    print(name);
+    print(email);
+    print(phone_number);
+    print(address);
+    print(profile_image);
+    var response = await NetworkHelper().put(
+       ApiConst.updateproviderProfile(id,name,email,address,phone_number),
+        // body: {
+        //   'name': name,
+        //   'email': email,
+        //   'address': address,
+        //   'phone_number': phone_number
+        // },
         files: {
           if(profile_image != null)
             'profile_image':profile_image
         }
     );
 print('.............response.........');
-print(response.data);
+print(response.data.toString());
   }
 
   static Future<void> destroy_provider_profile(int id)async{

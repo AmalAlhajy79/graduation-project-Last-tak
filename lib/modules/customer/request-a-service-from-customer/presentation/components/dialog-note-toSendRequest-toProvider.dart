@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
-import '../screens/test-send-request/mix-final-toSend-Request.dart';
+import '../controller/Customer-SendRequest-Urgent-controller.dart';
+
+// import '../screens/test-send-request/mix-final-toSend-Request.dart';
 
 
-void showDialogNoteToSendRequest(BuildContext context) {
+void showDialogNoteToSendRequestToProvider(BuildContext context,int id_prov) {
   TextEditingController noteController = TextEditingController();
   ClassificationController controller=ClassificationController();
   Get.dialog(
@@ -40,7 +42,7 @@ void showDialogNoteToSendRequest(BuildContext context) {
         TextButton(
           onPressed: ()async {
             if (noteController.text.isNotEmpty){
-             await controller.sendUrgentRequestToProvider(noteController.text);
+             await controller.sendUrgentRequestToProvider(noteController.text,id_prov);
              Navigator.of(context).pop();
 
              // Get.back();

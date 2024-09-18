@@ -29,7 +29,8 @@ class ShowProfileProviderController extends GetxController {
    //await ProfileUserDataSource.show_user_profile();
 
     profile.value= await ProfileProviderDataSource.show_provider_profile();//service.showAllProvider_Advic();
- //print();
+     update();
+    //print();
     print("Yeeeeeeeeeesssss...2....");
     //isLoding(false);
     super.onReady();

@@ -35,7 +35,6 @@ class ViewAllUrgentRequestFromCustomerForProviderDataSource {
         return Future.error("error...............");
       }
     } else if (requestController.serviceStatus.value == 'approved') {
-      // serviceController.url = 'http://127.0.0.1:8001/api/user/approved-services';
       final response = await NetworkHelper().get(ApiConst.provider_showAllUrgentRequestApproved);
 
       if (response.statusCode == 200) {
@@ -55,7 +54,6 @@ class ViewAllUrgentRequestFromCustomerForProviderDataSource {
         return Future.error("error...............");
       }
     } else if (requestController.serviceStatus.value == 'confirmed') {
-      // serviceController.url = 'http://127.0.0.1:8001/api/user/confirmed-services';
       final response = await NetworkHelper().get(ApiConst.provider_showAllUrgentRequestConfirmed);
 
       if (response.statusCode == 200) {
@@ -76,8 +74,8 @@ class ViewAllUrgentRequestFromCustomerForProviderDataSource {
       }
     }
   }
+
   Future<void> cancelReservation(int id) async {
-    // final url = 'http://192.168.43.31:8001/api/reservations/$id/cancel?reason=$reason&status=cancelled';
     final response = await NetworkHelper().post(ApiConst.CancelReservationProviderMyServices(id));
 
     if (response.statusCode == 200) {
@@ -88,5 +86,19 @@ class ViewAllUrgentRequestFromCustomerForProviderDataSource {
       return Future.error("Failed to cancel the reservation");
     }
   }
+
+  Future<void> approveReservationProvider(int id,String approved) async {
+    final response = await NetworkHelper().post(ApiConst.approveReservationProviderMyServices(id,approved));
+
+    if (response.statusCode == 200) {
+      print("............aprrove...");
+      print("Reservation approved successfully");
+    } else {
+      print("....no........aprrove...");
+      print("Failed to approved the reservation");
+      return Future.error("Failed to approved the reservation");
+    }
+  }
+
 
 }

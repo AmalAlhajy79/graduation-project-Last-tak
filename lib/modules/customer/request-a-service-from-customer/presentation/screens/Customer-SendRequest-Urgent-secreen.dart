@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:newtes1/core/consts/app_assets.dart';
 import 'package:newtes1/core/consts/app_colors.dart';
@@ -7,10 +9,15 @@ import 'package:newtes1/core/core_components/app_scaffold.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
 import '../../../../../core/core_components/button-Req-Serv.dart';
 import '../../../../../core/core_components/delete-button.dart';
+import '../../data/models/Classification-model.dart';
+import '../../data/models/ServiceTypes-model.dart';
 import '../components/card-service.dart';
-import '../components/send-button.dart';
+import '../components/dialog-note-toSendRequest-to-ALL-Provider.dart';
+import '../../data/models/service-model.dart';
 import '../components/sendButton-ToAll-Providers.dart';
+import '../controller/Customer-SendRequest-Urgent-controller.dart';
 import '../controller/Customer-SendRequest-Urgent-pinding.dart';
+import 'dart:io';
 
 class CustomerSendRequestUrgent extends StatelessWidget {
   CustomerSendRequestUrgent({Key? key}) : super(key: key);
@@ -35,6 +42,8 @@ class CustomerSendRequestUrgent extends StatelessWidget {
       selectedTime = newTime;
     }
   }
+  final ClassificationController controller = Get.put(ClassificationController());
+  final ServiceController controllerService = Get.put(ServiceController());
 
   @override
   Widget build(BuildContext context) {
@@ -100,78 +109,146 @@ class CustomerSendRequestUrgent extends StatelessWidget {
                           children: [
                             Padding(
                               padding: EdgeInsets.only(left: 1.w, right: 1.w),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                //  border: InputBorder.none,
-                                  hintText: 'Chose Section',
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      Icons.arrow_drop_down,
-                                      color: AppColors.green,
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                  hintStyle: TextStyle(
-                                      color: Colors.black87.withOpacity(0.5),
-                                      fontSize: 13.5,
-                                      fontWeight: FontWeight.w500),
-                                  filled: true,
-                                  fillColor: AppColors.greyfield.withAlpha(27),
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(2.5.w),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    borderSide: BorderSide(color: Colors.blue),
-                                  ),
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 16.0, vertical: 12.0),
+                              child:
+                              Container(
+                                width: 90.w,
+                                  height: 12.w,
+                                decoration: BoxDecoration(
+
+                                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                                  border: Border.all(width: 0.5)
                                 ),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                ),
+                                  child: Padding(
+                                    padding:  EdgeInsets.only(left:1.w ),
+                                    child: ClassificationDropdown(),
+                                  )
                               ),
+                              // TextField(
+                              //   decoration: InputDecoration(
+                              //   //  border: InputBorder.none,
+                              //     hintText: 'Chose Section',
+                              //     suffixIcon: IconButton(
+                              //       icon: Icon(
+                              //         Icons.arrow_drop_down,
+                              //         color: AppColors.green,
+                              //       ),
+                              //       onPressed: () {},
+                              //     ),
+                              //     hintStyle: TextStyle(
+                              //         color: Colors.black87.withOpacity(0.5),
+                              //         fontSize: 13.5,
+                              //         fontWeight: FontWeight.w500),
+                              //     filled: true,
+                              //     fillColor: AppColors.greyfield.withAlpha(27),
+                              //     border: OutlineInputBorder(
+                              //       borderSide: BorderSide.none,
+                              //       borderRadius: BorderRadius.circular(2.5.w),
+                              //     ),
+                              //     focusedBorder: OutlineInputBorder(
+                              //       borderRadius: BorderRadius.circular(10.0),
+                              //       borderSide: BorderSide(color: Colors.blue),
+                              //     ),
+                              //     contentPadding: EdgeInsets.symmetric(
+                              //         horizontal: 16.0, vertical: 12.0),
+                              //   ),
+                              //   style: TextStyle(
+                              //     color: Colors.black,
+                              //     fontSize: 16.0,
+                              //   ),
+                              // ),
                             ),
                             SizedBox(
                               height: 1.w,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                   // border: InputBorder.none,
-                                    hintText: 'Chose SubSection',
-                                    hintStyle: TextStyle(
-                                        color: Colors.black87.withOpacity(0.5),
-                                        fontSize: 13.5,
-                                        fontWeight: FontWeight.w500),
-                                    filled: true,
-                                    fillColor: AppColors.greyfield.withAlpha(27),
-                                    border: OutlineInputBorder(
-                                      borderSide: BorderSide.none,
-                                      borderRadius: BorderRadius.circular(2.5.w),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                      borderSide:
-                                          BorderSide(color: Colors.blue),
-                                    ),
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 16.0, vertical: 12.0),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_drop_down,
-                                        color: AppColors.green,
-                                      ),
-                                      onPressed: () {},
-                                    ),
-                                ),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16.0,
-                                ),
+                              child: Container(
+                                  width: 93.w,
+                                  height: 12.w,
+                                  decoration: BoxDecoration(
+
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                      border: Border.all(width: 0.5)
+                                  ),
+                                  child: Padding(
+                                    padding:  EdgeInsets.only(left:1.w ),
+                                    child: ServiceTypeDropdown(),
+                                  )
+                              ),
+
+                              // TextField(
+                              //   decoration: InputDecoration(
+                              //      // border: InputBorder.none,
+                              //       hintText: 'Chose SubSection',
+                              //       hintStyle: TextStyle(
+                              //           color: Colors.black87.withOpacity(0.5),
+                              //           fontSize: 13.5,
+                              //           fontWeight: FontWeight.w500),
+                              //       filled: true,
+                              //       fillColor: AppColors.greyfield.withAlpha(27),
+                              //       border: OutlineInputBorder(
+                              //         borderSide: BorderSide.none,
+                              //         borderRadius: BorderRadius.circular(2.5.w),
+                              //       ),
+                              //       focusedBorder: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(10.0),
+                              //         borderSide:
+                              //             BorderSide(color: Colors.blue),
+                              //       ),
+                              //       contentPadding: EdgeInsets.symmetric(
+                              //           horizontal: 16.0, vertical: 12.0),
+                              //       suffixIcon: IconButton(
+                              //         icon: Icon(
+                              //           Icons.arrow_drop_down,
+                              //           color: AppColors.green,
+                              //         ),
+                              //         onPressed: () {},
+                              //       ),
+                              //   ),
+                              //   style: TextStyle(
+                              //     color: Colors.black,
+                              //     fontSize: 16.0,
+                              //   ),
+                              // ),
+                            ),
+                            SizedBox(
+                              height: 1.w,
+                            ),
+                            Padding(
+                              padding:  EdgeInsets.only(left: 1.w),
+                              child: Container(
+                                  width: 86.w,
+                                  height: 12.w,
+                                  decoration: BoxDecoration(
+
+                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                      border: Border.all(width: 0.5)
+                                  ),
+                                  child: Padding(
+                                    padding:  EdgeInsets.only(left:1.w ),
+                                    child:  Obx(() {
+                                      if (controllerService.services.isEmpty) {
+                                        return Row(
+                                          children: [
+                                            Text("Select Classification and Service Type first"),
+                                          ],
+                                        );//CircularProgressIndicator();
+                                      }
+                                      return DropdownButton<Service>(
+                                        value: controllerService.selectedService.value,
+                                        hint: Text('select service'),
+                                        items: controllerService.services.map((Service service) {
+                                          return DropdownMenuItem<Service>(
+                                            value: service,
+                                            child: Text(service.name),
+                                          );
+                                        }).toList(),
+                                        onChanged: (Service? newValue) {
+                                          controllerService.setSelectedService(newValue);
+                                        },
+                                      );
+                                    }),
+                                  )
                               ),
                             ),
                             SizedBox(
@@ -204,7 +281,9 @@ class CustomerSendRequestUrgent extends StatelessWidget {
                                           topLeft:  Radius.circular(5),
                                           topRight:  Radius.circular(5),
                                         ),
-                                        onTap: () {},
+                                        onTap: () {
+                                          showDialogNoteToSendRequestTo_ALLProvider(context);
+                                        },
                                         heightContainer: 9.w,
                                         colorContainer: AppColors.orange.withAlpha(240),
 
@@ -219,7 +298,10 @@ class CustomerSendRequestUrgent extends StatelessWidget {
                             SizedBox(height: 6.w,),
                             Padding(
                               padding: EdgeInsets.only(right: 3.w,left: 3.w),
-                              child: Container(
+                              child:
+                                  controller.data!=null?
+                              Obx(() =>
+                              Container(
                                 height: 104.6.w,
                                 width: 95.w,
                                 child: GridView.builder(
@@ -229,14 +311,36 @@ class CustomerSendRequestUrgent extends StatelessWidget {
                                     crossAxisSpacing: 14,
                                     maxCrossAxisExtent: 100.w/2,
                                   ),
-                                  itemCount:6,
+                                  itemCount:controller.data.length,
                                   itemBuilder: (context,index){
-                                    return CardService();
+
+                                    controller.id_available_provider.value=index ;
+
+                                    return  CardService(index,controller.data[index].id);
+                                    //   Container(
+                                    //
+                                    //   child:  Container(
+                                    //     height: 50,
+                                    //     width: 50,
+                                    //     child:Image.file(File('http://192.168.43.31:8001${controller.data[index].profileImage}'))
+                                    //     // Image.network(
+                                    //     //   'http://192.168.43.31:8001${controller.data[index].profileImage}', // تأكد من استخدام الرابط الصحيح
+                                    //     //   fit: BoxFit.cover,
+                                    //     // ),
+                                    //   ),
+                                    //   // Image.file(
+                                    //   //   File(
+                                    //   //       "${controller.data[index].profileImage}"),
+                                    //   //   fit: BoxFit.cover,
+                                    //   // ),
+                                    // );
+                                    //
 
                                   },
 
                                 ),
                               ),
+                              ):CircularProgressIndicator()
                             ),
                           ],
                         ),
@@ -244,21 +348,9 @@ class CustomerSendRequestUrgent extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 35.w,
+                    height: 5.w,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: 6.w,
-                      left: 6.w,
-                      right: 6.w,
-                    ),
-                    child: DeleteButton(
-                      title: "Confirm",
-                      fontSizeText: 16,
-                      colorContainer: AppColors.orange,
-                      heightContainer: 11.5.w,
-                    ),
-                  ),
+
                 ],
               ),
             ]),
@@ -305,38 +397,73 @@ class CustomerSendRequestUrgent extends StatelessWidget {
             onTap: (value) => print("AA..........AA"),
           ),
         )
-        // Container(
-        //   height: 15.w,
-        //   decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //       colors: [AppColors.green,AppColors.cyan],
-        //         begin: Alignment.bottomLeft,
-        //       end: Alignment.topRight
-        //
-        //     )
-        //   ),
-        //   child: BottomNavigationBar(
-        //     backgroundColor:AppColors.green ,//Colors.cyan.shade700 ,
-        //     items: <BottomNavigationBarItem>[
-        //       BottomNavigationBarItem(
-        //         icon: Icon(Icons.home,color: Colors.white,size: 26,),
-        //         label: '',
-        //       ),
-        //       BottomNavigationBarItem(
-        //         icon: Icon(Icons.menu_sharp,color: Colors.white,size: 26),
-        //         label: '',
-        //       ),
-        //       BottomNavigationBarItem(
-        //         icon: Icon(Icons.person,color: Colors.white,size: 26),
-        //         label: '',
-        //       ),
-        //     ],
-        //     currentIndex: _selectedIndex,
-        //     selectedItemColor: AppColors.green,
-        //    // unselectedItemColor:AppColors.white ,
-        //     onTap: (value) => print("AA..........AA"),
-        //   ),
-        // ),
+
         );
+  }
+}
+class ClassificationDropdown extends StatelessWidget {
+  final ClassificationController controller = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      if (controller.classifications.isEmpty) {
+        return Row(
+          children: [
+            Text('Selecte Classification'),
+          ],
+        );//CircularProgressIndicator();
+      }
+      return DropdownButton<Classification>(
+        value: controller.selectedClassification.value,
+        hint: Text('Selecte Classification'),
+        items: controller.classifications.map((Classification classification) {
+          return DropdownMenuItem<Classification>(
+            value: classification,
+            child: Text(classification.category),
+          );
+        }).toList(),
+        onChanged: (Classification? newValue) {
+          controller.setSelectedClassification(newValue);
+          print("........classifications-id");
+          print(newValue?.id);
+        },
+      );
+    });
+  }
+}
+
+class ServiceTypeDropdown extends StatelessWidget {
+  final ClassificationController controller = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      if (controller.selectedClassification.value == null) {
+        return Row(
+          children: [
+            Text('Select Classification first'),
+          ],
+        );
+      }
+      if (controller.serviceTypes.isEmpty) {
+        return Text("Select Classification first");//CircularProgressIndicator();
+      }
+      return DropdownButton<ServiceType>(
+        value: controller.selectedServiceType.value,
+        hint: Text('selecte Section '),
+        items: controller.serviceTypes.map((ServiceType serviceType) {
+          return DropdownMenuItem<ServiceType>(
+            value: serviceType,
+            child: Text(serviceType.name),
+          );
+        }).toList(),
+        onChanged: (ServiceType? newValue) {
+          controller.setSelectedServiceType(newValue);
+          print("........type-id");
+          print(newValue?.id);
+        },
+      );
+    });
   }
 }

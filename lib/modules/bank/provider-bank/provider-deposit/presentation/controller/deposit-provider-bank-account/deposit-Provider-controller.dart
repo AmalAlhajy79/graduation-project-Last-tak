@@ -21,7 +21,7 @@ class DepositProviderController extends GetxController {
     int amount = int.tryParse(amountController.text) ?? 0;
     print('amount......');
     print(amount);
-    await depositProviderDataSource().depositProvidernew(1, amount);
+    await depositProviderDataSource().depositProvidernew(amount);
   }
 
   @override

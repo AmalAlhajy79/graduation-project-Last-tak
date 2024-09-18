@@ -5,7 +5,7 @@ class CustomerSendRequestUrgentControllerBinding extends Bindings {
 
   @override
   void dependencies() {
-    Get.put(CustomerSendRequestUrgentController());
+    Get.put(ClassificationController());
   }
 
 }

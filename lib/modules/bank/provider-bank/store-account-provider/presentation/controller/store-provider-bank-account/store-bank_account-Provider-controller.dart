@@ -25,8 +25,8 @@ class StoreAccountProviderController extends GetxController {
   DataState<void> _dataState = DataState<void>();
 
   DataStatus get status => _dataState.status;
-  Future<void> storeAccountProviderBank(int account_number, String account_holder_name,String bank_name,String branch_code,int provider_id) async {
-    await StoreAccountProviderDataSource().storbankProvidernew(account_number, account_holder_name, bank_name, branch_code, provider_id);
+  Future<void> storeAccountProviderBank(int account_number, String account_holder_name,String bank_name,String branch_code) async {
+    await StoreAccountProviderDataSource().storbankProvidernew(account_number, account_holder_name, bank_name, branch_code);
   }
 
   @override

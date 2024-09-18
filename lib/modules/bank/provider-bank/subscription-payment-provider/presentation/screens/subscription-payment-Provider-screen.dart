@@ -8,7 +8,10 @@ import '../../../../../../core/consts/app_colors.dart';
 import '../../../../../../core/core_components/app_scaffold.dart';
 import '../../../../../../core/core_components/app_submit_button.dart';
 import '../../../../../../core/core_components/image_selector.dart';
+import '../../../../../provider/home/mainDrawer.dart';
+import '../../../../../provider/home/mainScreen.dart';
 import '../components/app_text_form_feild.dart';
+import '../components/dialog-subscription.dart';
 import '../controller/subscription-payment-provider-bank-account/subscription-payment-Provider-binding.dart';
 import '../controller/subscription-payment-provider-bank-account/subscription-payment-Provider-controller.dart';
 
@@ -28,7 +31,7 @@ class SubscriptionPaymentProviderScreen extends GetView<SubscriptionPaymentProvi
     var mq = MediaQuery.of(context);
     int _selectedIndex = 0;
     return AppScaffold(
-      drawer: Drawer(),
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: Center(
             child: Text(
@@ -47,30 +50,32 @@ class SubscriptionPaymentProviderScreen extends GetView<SubscriptionPaymentProvi
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
              //const AuthHeader(),
+              SizedBox(
+                height: 9.w,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 0.6.w,
+                    right: 0.1.w,
+                    bottom: 7.w
+                ),
+                child: Row(
+                  children: [
+                    IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.arrow_back_sharp, color: AppColors.green),),
+
+                    Text(
+                      "Subscription Payment",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                    )
+                  ],
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.all(5.w).copyWith(top: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 9.w,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 0.1.w,
-                        right: 0.1.w,
-                        bottom: 7.7.w
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.arrow_back_sharp, color: AppColors.green),
-                          Text(
-                            " Subscription Payment",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-                          )
-                        ],
-                      ),
-                    ),
+
                     SizedBox(
                       height: 19.5.w,
                     ),
@@ -105,7 +110,47 @@ class SubscriptionPaymentProviderScreen extends GetView<SubscriptionPaymentProvi
                       height: 13.w,
                     ),
                     AppSubmitButton(
-                      onTap:(){ controller.subscriptionPaymentProviderBank();}  //controller.storeAccountUserBank(,'hhh','','',1),
+                      onTap:(){
+                        Get.dialog(
+                          AlertDialog(
+                            // title: Text('Cancel Reservation'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    'Sure you want to subscribe?',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () async{
+                                  await  controller.subscriptionPaymentProviderBank();
+                                  Get.toNamed(MainScreen.name);
+                                },
+                                child: Text('Submit'),
+                              ),
+                            ],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                            ),
+                          ),
+                          barrierDismissible: false,
+                        );
+                        //showConfirmSubscriptionDialog(context);//,controller.emailController,controller.passwordController);
+                        // controller.subscriptionPaymentProviderBank();
+                      }  //controller.storeAccountUserBank(,'hhh','','',1),
                     ),
                     SizedBox(
                       height: 5.w,

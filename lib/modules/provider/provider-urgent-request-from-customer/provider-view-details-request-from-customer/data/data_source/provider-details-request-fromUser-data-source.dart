@@ -16,30 +16,32 @@ class ProviderDetailsMyRequestFromCustomerDataSource {
 
   ProviderDetailsMyRequestFromCustomerDataSource(this.detailsRequestController);
 
-  Future<void> fetchDetailsRequest() async {
+  Future<void> fetchDetailsRequest(int id) async {
     if (detailsRequestController.serviceStatus.value == 'pending') {
-      final response = await NetworkHelper().get(ApiConst.provider_showDetailsUrgentRequestPending(2));
-
+      final response = await NetworkHelper().get(ApiConst.provider_showDetailsUrgentRequestPending(id));
+print("api............");
+print(ApiConst.provider_showDetailsUrgentRequestPending(id));
       if (response.statusCode == 200) {
         final jsonData = response.data;
-        print(jsonData);
-        print("AAAAAAAAAAAAAAAAAAAA");
+        // print(jsonData);
+        // print("AAAAAAAAAAAAAAAAAAAA");
         var services = ProviderDetailsRequestPendingModel.fromJson(jsonData).requestDetails_urgent ;
         if (services != null) {
-          print('...........serviceName');
-         print( services.serviceName);
+         //  print('...........serviceName');
+         // print( services.serviceName);
           detailsRequestController.requestDetailsPending.value= services as RequestDetailsPending ;
         } else {
           detailsRequestController.requestDetailsPending.close();
         }
-        print("BBBBBBBBBBBBBBb");
+        // print("BBBBBBBBBBBBBBb");
       } else {
         print("** error in server or field **");
         return Future.error("error...............");
       }
     } else if (detailsRequestController.serviceStatus.value == 'approved') {
-      final response = await NetworkHelper().get(ApiConst.provider_showDetailsUrgentRequestApproved(1));
-
+      final response = await NetworkHelper().get(ApiConst.provider_showDetailsUrgentRequestApproved(id));
+      print("api............");
+      print(ApiConst.provider_showDetailsUrgentRequestPending(id));
       if (response.statusCode == 200) {
         final jsonData = response.data;
         print(jsonData);
@@ -57,8 +59,9 @@ class ProviderDetailsMyRequestFromCustomerDataSource {
         return Future.error("error...............");
       }
     } else if (detailsRequestController.serviceStatus.value == 'confirmed') {
-      final response = await NetworkHelper().get(ApiConst.provider_showDetailsUrgentRequestConfirmed(1));
-
+      final response = await NetworkHelper().get(ApiConst.provider_showDetailsUrgentRequestConfirmed(id));
+      print("api............");
+      print(ApiConst.provider_showDetailsUrgentRequestPending(id));
       if (response.statusCode == 200) {
         final jsonData = response.data;
         print(jsonData);
@@ -77,8 +80,8 @@ class ProviderDetailsMyRequestFromCustomerDataSource {
       }
     }
   }
-  Future<void> cancelReservation(int id, String reason) async {
-    final response = await NetworkHelper().post(ApiConst.CancelReservationUserMyServices(id, reason));
+  Future<void> cancelReservation(int id) async {
+    final response = await NetworkHelper().post(ApiConst.deleteReservationFromProviderDetailsRequest(id));
 
     if (response.statusCode == 200) {
 
@@ -86,6 +89,19 @@ class ProviderDetailsMyRequestFromCustomerDataSource {
     } else {
       print("Failed to cancel the reservation");
       return Future.error("Failed to cancel the reservation");
+    }
+  }
+
+  Future<void> approveReservationProvider(id, approved) async{
+    final response = await NetworkHelper().post(ApiConst.approveReservationProviderMyServices(id,approved));
+
+    if (response.statusCode == 200) {
+      print("............aprrove...");
+      print("Reservation approved successfully");
+    } else {
+      print("....no........aprrove...");
+      print("Failed to approved the reservation");
+      return Future.error("Failed to approved the reservation");
     }
   }
 

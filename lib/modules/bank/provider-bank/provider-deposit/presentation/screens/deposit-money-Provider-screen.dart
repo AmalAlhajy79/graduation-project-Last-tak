@@ -5,6 +5,8 @@ import 'package:newtes1/core/ui_sizer/app_sizer.dart';
 import '../../../../../../core/consts/app_colors.dart';
 import '../../../../../../core/core_components/app_scaffold.dart';
 import '../../../../../../core/core_components/app_submit_button.dart';
+import '../../../../../provider/home/mainDrawer.dart';
+import '../../../../../provider/home/mainScreen.dart';
 import '../components/app_text_form_feild.dart';
 import '../controller/deposit-provider-bank-account/deposit-Provider-binding.dart';
 import '../controller/deposit-provider-bank-account/deposit-Provider-controller.dart';
@@ -24,7 +26,7 @@ class DepositProviderScreen extends GetView<DepositProviderController> {
     var mq = MediaQuery.of(context);
     int _selectedIndex = 0;
     return AppScaffold(
-      drawer: Drawer(),
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: Center(
             child: Text(
@@ -43,30 +45,31 @@ class DepositProviderScreen extends GetView<DepositProviderController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
              //const AuthHeader(),
+              SizedBox(
+                height: 8.w,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 2.w,
+                    right: 0.1.w,
+                    bottom: 7.7.w
+                ),
+                child: Row(
+                  children: [
+                    IconButton(onPressed: (){Get.back();}, icon:Icon(Icons.arrow_back_sharp, color: AppColors.green),),
+                    Text(
+                      "Deposit money",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                    )
+                  ],
+                ),
+              ),
+
               Padding(
                 padding: EdgeInsets.all(5.w).copyWith(top: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 8.w,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 0.1.w,
-                        right: 0.1.w,
-                        bottom: 7.7.w
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.arrow_back_sharp, color: AppColors.green),
-                          Text(
-                            " Deposit money",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-                          )
-                        ],
-                      ),
-                    ),
 
 
                     SizedBox(
@@ -104,7 +107,47 @@ class DepositProviderScreen extends GetView<DepositProviderController> {
                       height: 16.w,
                     ),
                     AppSubmitButton(
-                      onTap:(){ controller.depositProviderBank();}  //controller.storeAccountUserBank(,'hhh','','',1),
+                      onTap:(){
+                        Get.dialog(
+                          AlertDialog(
+                            // title: Text('Cancel Reservation'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    'Sure you want to depose money?',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.toNamed(MainScreen.name);
+                                },
+                                child: Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () async{
+
+                                  await  controller.depositProviderBank();
+                                  Get.toNamed(MainScreen.name);
+                                },
+                                child: Text('Submit'),
+                              ),
+                            ],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                            ),
+                          ),
+                          barrierDismissible: false,
+                        );
+                        // controller.depositProviderBank();
+                      }  //controller.storeAccountUserBank(,'hhh','','',1),
                     ),
                     SizedBox(
                       height: 5.w,

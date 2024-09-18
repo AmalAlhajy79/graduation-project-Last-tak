@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 
-import '../screens/test-send-request/mix-final-toSend-Request.dart';
+import '../controller/Customer-SendRequest-Urgent-controller.dart';
+
+// import '../screens/test-send-request/mix-final-toSend-Request.dart';
 
 
-void showDialogNoteToSendRequest(BuildContext context) {
+void showDialogNoteToSendRequestTo_ALLProvider(BuildContext context) {
   TextEditingController noteController = TextEditingController();
   ClassificationController controller=ClassificationController();
   Get.dialog(
@@ -17,7 +19,7 @@ void showDialogNoteToSendRequest(BuildContext context) {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Please enter the note to send it to Provider:',
+            'Please enter the note to send it to All Providers:',
             style: TextStyle(color: Colors.grey),
           ),
           SizedBox(height: 10),
@@ -40,7 +42,7 @@ void showDialogNoteToSendRequest(BuildContext context) {
         TextButton(
           onPressed: ()async {
             if (noteController.text.isNotEmpty){
-             await controller.sendUrgentRequestToProvider(noteController.text);
+             await controller.sendUrgentRequestTo_ALLProvider(noteController.text);
              Navigator.of(context).pop();
 
              // Get.back();

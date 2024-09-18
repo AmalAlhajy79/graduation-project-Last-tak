@@ -8,6 +8,9 @@ import '../../../../../../core/consts/app_colors.dart';
 import '../../../../../../core/core_components/app_scaffold.dart';
 import '../../../../../../core/core_components/app_submit_button.dart';
 import '../../../../../../core/core_components/image_selector.dart';
+import '../../../../../provider/home/mainDrawer.dart';
+import '../../../../../provider/home/mainScreen.dart';
+import '../../../provider-deposit/presentation/screens/deposit-money-Provider-screen.dart';
 import '../components/app_text_form_feild.dart';
 import '../controller/store-provider-bank-account/store-bank_account-Provider-binding.dart';
 import '../controller/store-provider-bank-account/store-bank_account-Provider-controller.dart';
@@ -28,7 +31,7 @@ class StoreAccountProviderScreen extends GetView<StoreAccountProviderController>
     var mq = MediaQuery.of(context);
     int _selectedIndex = 0;
     return AppScaffold(
-      drawer: Drawer(),
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: Center(
             child: Text(
@@ -47,30 +50,32 @@ class StoreAccountProviderScreen extends GetView<StoreAccountProviderController>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
              //const AuthHeader(),
+              SizedBox(
+                height: 8.w,
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: 0.8.w,
+                    right: 0.1.w,
+                    bottom: 7.w
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    IconButton(onPressed: (){Get.back();}, icon: Icon(Icons.arrow_back_sharp, color: AppColors.green),),
+                    Text(
+                      "Create Provider Account",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+                    )
+                  ],
+                ),
+              ),
+
               Padding(
                 padding: EdgeInsets.all(5.w).copyWith(top: 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 8.w,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 0.1.w,
-                        right: 0.1.w,
-                        bottom: 7.7.w
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.arrow_back_sharp, color: AppColors.green),
-                          Text(
-                            " Store Provider Account",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
-                          )
-                        ],
-                      ),
-                    ),
 
 
                     AppTextFormField(
@@ -134,13 +139,93 @@ class StoreAccountProviderScreen extends GetView<StoreAccountProviderController>
                       height: 15.w,
                     ),
                     AppSubmitButton(
-                      onTap:(){ controller.storeAccountProviderBank(
-                          controller.account_numberController.hashCode,
-                          controller.account_holder_nameController.text,
-                          controller.bank_nameController.text,
-                          controller.branch_codeController.text,
-                                1
-                      );}  //controller.storeAccountUserBank(,'hhh','','',1),
+                      onTap:(){
+                        Get.dialog(
+                          AlertDialog(
+                            // title: Text('Cancel Reservation'),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Center(
+                                  child: Text(
+                                    'Sure you want to create account?',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+
+                              ],
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () async{
+                                  await   controller.storeAccountProviderBank(
+                                      controller.account_numberController.hashCode,
+                                      controller.account_holder_nameController.text,
+                                      controller.bank_nameController.text,
+                                      controller.branch_codeController.text
+                                  );
+                                  Get.dialog(
+                                    AlertDialog(
+                                      // title: Text('Cancel Reservation'),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Center(
+                                            child: Text(
+                                              'Do you want to deposit money?',
+                                              style: TextStyle(color: Colors.grey),
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+
+                                        ],
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Get.toNamed(MainScreen.name);
+                                          },
+                                          child: Text('No'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async{
+                                            Get.toNamed(DepositProviderScreen.name);
+                                            // Get.toNamed(MainScreen.name);
+                                          },
+                                          child: Text('yes'),
+                                        ),
+                                      ],
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                                      ),
+                                    ),
+                                    barrierDismissible: false,
+                                  );
+                                 // Get.toNamed(MainScreen.name);
+                                },
+                                child: Text('Submit'),
+                              ),
+                            ],
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(12)),
+                            ),
+                          ),
+                          barrierDismissible: false,
+                        );
+                      //   controller.storeAccountProviderBank(
+                      //     controller.account_numberController.hashCode,
+                      //     controller.account_holder_nameController.text,
+                      //     controller.bank_nameController.text,
+                      //     controller.branch_codeController.text
+                      // );
+                      }  //controller.storeAccountUserBank(,'hhh','','',1),
                     ),
                     SizedBox(
                       height: 5.w,

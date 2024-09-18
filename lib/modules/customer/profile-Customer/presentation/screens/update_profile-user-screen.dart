@@ -135,6 +135,7 @@ class Update_UserProfileScreen extends GetView<Update_ProfileUserController> {
                     SizedBox(
                       height: 5.w,
                     ),
+
                     AppSubmitButton(
                       onTap: controller.updateProfCustom,
                     ),
@@ -146,9 +147,9 @@ class Update_UserProfileScreen extends GetView<Update_ProfileUserController> {
                     //   text2: 'Login now.',
                     //   onTap: ()=>Get.offAllNamed(LoginScreen.name),
                     // ),
-                    SizedBox(
-                      height: mq.viewInsets.bottom,
-                    ),
+                    // SizedBox(
+                    //   height: mq.viewInsets.bottom,
+                    // ),
 
                   ],
                 ),

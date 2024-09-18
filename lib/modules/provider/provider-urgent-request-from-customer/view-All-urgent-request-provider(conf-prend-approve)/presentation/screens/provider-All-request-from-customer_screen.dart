@@ -8,9 +8,13 @@ import 'package:newtes1/core/core_components/app_scaffold.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
 import '../../../../../../core/consts/app_colors.dart';
 import '../../../../../../core/core_components/button-Req-Serv.dart';
+import '../../../../home/mainDrawer.dart';
 import '../../../provider-view-details-request-from-customer/presentation/screens/provider-detailes-request-from-customer.dart';
 import '../controller/show-All-Urgent_request-controller.dart';
 import '../controller/show-All-Urgent_request-pinding.dart';
+
+
+
 
 class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
   ProviderAllUrgentRequestFromCustomerScreen({Key? key}) : super(key: key);
@@ -26,7 +30,7 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var _selectedIndex = 0;
     return AppScaffold(
-      drawer: Drawer(),
+      drawer: MainDrawer(),
       appBar: AppBar(
         title: Center(
             child: Text(
@@ -43,34 +47,6 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
       body: ListView(children: [
         Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: 5.w, right: 5.w),
-              child: Container(
-                height: 40,
-                child: TextField(
-                  decoration: InputDecoration(
-                      fillColor: AppColors.greyfield.withAlpha(27),
-                      filled: true,
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(2.5.w),
-                      ),
-                      hintText: 'search',
-                      hintStyle: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black45),
-                      prefixIcon: Icon(
-                        CupertinoIcons.search,
-                        size: 14,
-                        color: AppColors.greyfield,
-                      )),
-                  //   controller:// controller.searchBoxController,
-                  // //  textInputAction: TextInputAction.search,
-                  //  onEditingComplete: controller.showSearchResult
-                ),
-              ),
-            ),
             SizedBox(
               height: 16,
             ),
@@ -81,7 +57,10 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.arrow_back_sharp, color: Colors.cyan),
+                  IconButton(onPressed: (){
+                    Get.back();
+                  }, icon:  Icon(Icons.arrow_back_sharp, color: Colors.cyan),),
+
                   Text(
                     " Urgent service request",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -147,7 +126,7 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: 2.w,
+                      height: 3.w,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -262,7 +241,7 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
                     var service = services[index];
                     return InkWell(
                       onTap: (){
-                        Get.toNamed(ProviderDetailsMyRequestFromCustomer.name);
+                        Get.toNamed(ProviderDetailsMyRequestFromCustomer.name,arguments:service.id );//,id: service.id);
                       },
                       child:  Column(
                         children: [
@@ -333,9 +312,11 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
                                     },
                                   ),
                                 ),
+                                if (controller.serviceStatus.value == 'approved')
                                 SizedBox(
                                   width: 27.8.w,
-                                  child: ButtonReqServic(
+                                  child:
+                                  ButtonReqServic(
                                     title: "Approve By QR",
                                     colorContainer: AppColors.green.withAlpha(1500),
                                     colorTextStyle: AppColors.white,
@@ -357,6 +338,7 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
                                     onTap: () {},
                                   ),
                                 ),
+                                if (controller.serviceStatus.value == 'pending')
                                 SizedBox(
                                   width: 26.w - 1,
                                   child: ButtonReqServic(
@@ -378,7 +360,7 @@ class ProviderAllUrgentRequestFromCustomerScreen extends StatelessWidget {
                                         ],
                                         begin: Alignment.bottomLeft,
                                         end: Alignment.topRight),
-                                    onTap: () {},
+                                    onTap: () {controller.approveReservation_InProvider(service.id, "approved");},
                                   ),
                                 ),
                               ],

@@ -16,6 +16,7 @@ import 'modules/customer/profile-Customer/presentation/screens/update_profile-us
 import 'modules/customer/profile-any-Provider-from-service-details/presentation/screens/profile-provider-fromDetails_Screen.dart';
 import 'modules/customer/request-a-service-from-customer/presentation/screens/Customer-SendRequest-Urgent-secreen.dart';
 import 'modules/customer/viewMyServices/presentation/screens/view-my-services.dart';
+import 'modules/provider/home/mainScreen.dart';
 import 'modules/provider/profile-provider/presentation/screens/profile-provider_Screen.dart';
 import 'modules/provider/profile-provider/presentation/screens/store-profile-Provider-screen.dart';
 import 'modules/provider/profile-provider/presentation/screens/update_profile-provider-screen.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
      // locale: StorageHandler().locale,
         initialRoute: CustomerSendRequestUrgent.name,
       getPages: [
+        MainScreen.page,
         CustomerProfile.page,
         AnyProviderProfileFromServiceDetails.page,
        StoreeUserProfileScreen.page,
@@ -65,9 +67,9 @@ class MyApp extends StatelessWidget {
         ProviderProfile.page,
         StoreProviderProfileScreen.page,
         ProviderDetailsMyRequestFromCustomer.page,
-       Update_ProviderProfileScreen.page,
+        Update_ProviderProfileScreen.page,
         CustomerSendRequestUrgent.page,
-
+        SubscriptionPaymentProviderScreen.page,
 
       ],
 

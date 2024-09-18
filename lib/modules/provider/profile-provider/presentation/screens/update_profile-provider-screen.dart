@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:newtes1/core/ui_sizer/app_sizer.dart';
+import 'package:newtes1/modules/provider/profile-provider/presentation/screens/profile-provider_Screen.dart';
 import '../../../../../core/consts/app_colors.dart';
 import '../../../../../core/core_components/app_scaffold.dart';
 import '../../../../../core/core_components/image_selector.dart';
@@ -62,7 +63,13 @@ class Update_ProviderProfileScreen extends GetView<Update_ProfileProviderControl
                       ),
                       child: Row(
                         children: [
-                          Icon(Icons.arrow_back_sharp, color: AppColors.green),
+                          IconButton(
+                            onPressed: (){
+                              Get.back();
+                            },
+                            icon: Icon(Icons.arrow_back_sharp, color: AppColors.green),
+                          ),
+
                           Text(
                             " Update Profile",
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
@@ -134,7 +141,7 @@ class Update_ProviderProfileScreen extends GetView<Update_ProfileProviderControl
                       height: 5.w,
                     ),
                     AppSubmitButton(
-                      onTap: controller.updateProfProvider,
+                      onTap: controller.updateProfProvider
                     ),
                     SizedBox(
                       height: 5.w,

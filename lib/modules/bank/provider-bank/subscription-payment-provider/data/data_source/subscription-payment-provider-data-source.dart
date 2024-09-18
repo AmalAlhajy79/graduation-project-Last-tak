@@ -10,12 +10,18 @@ import '../../../../../../core/network/network_helper.dart';
 class SubscriptionPaymentProviderDataSource{
 
   Future<void> subscriptionpaymentProvidernew( String token,String email,String password) async {
-    // final url = 'http://127.0.0.1:8001/api/bank-account-information?account_number=2&account_holder_name=amal2&bank_name=barka2&branch_code=112233&user_id=1';
+print('jjjjjj.....');
+print(token);
+print(email);
+print(password);
+print(ApiConst.subscription_paymentProvidernew(token,email,password));
     final response = await NetworkHelper().post(ApiConst.subscription_paymentProvidernew(token,email,password));
-
-    if (response.statusCode == 200) {
+print('aaaaaaaaa.....');
+    print(response.data);
+if (response.statusCode == 200) {
 
       print("create Provider Bank account successfully");
+      print(response.data);
     } else {
       print("Failed to create Provider Bank account");
       return Future.error("Failed to create Provider Bank account");

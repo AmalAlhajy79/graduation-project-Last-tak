@@ -1,6 +1,6 @@
 class ApiConst {
   static const _baseUrl = 'http://192.168.43.31:8001/api';//'http://192.168.43.31:8001/api'; //'http://127.0.0.1:8001/api';
-
+                                                         //'http://192.168.43.31:8004/api';
   static const userProfile = '$_baseUrl/profiles';
   static const storeuserProfile = '$userProfile';
 
@@ -33,11 +33,11 @@ class ApiConst {
   static String storbankusernew(int account_number,String account_holder_name,String bank_name,String branch_code,int user_id) =>
     '$_baseUrl/bank-account-information?account_number=$account_number&account_holder_name=$account_holder_name&bank_name=$bank_name&branch_code=$branch_code&user_id=$user_id';
 
-  static String storbankProvidernew(int account_number, String account_holder_name, String bank_name, String branch_code, int provider_id) =>
-      '$_baseUrl/service-provider/bank-account-information?account_number=$account_number&account_holder_name=$account_holder_name&bank_name=$bank_name&branch_code=$branch_code&provider_id=$provider_id';
+  static String storbankProvidernew(int account_number, String account_holder_name, String bank_name, String branch_code) =>
+      '$_baseUrl/service-provider/bank-account-information?account_number=$account_number&account_holder_name=$account_holder_name&bank_name=$bank_name&branch_code=$branch_code';
 
-  static String depositProviderrnew(int provider_id, int amount) =>
-      '$_baseUrl/provider-deposit?provider_id=$provider_id&amount=$amount';
+  static String depositProviderrnew(int amount) =>
+      '$_baseUrl/provider-deposit?amount=$amount';
 
   static String depositUsernew(int user_id, int amount) =>
       '$_baseUrl/bank/deposit?user_id=$user_id&amount=$amount';
@@ -49,11 +49,15 @@ class ApiConst {
       '$_baseUrl/transfer-funds?user_id=$user_id&provider_id=$provider_id&amount=$amount&service_id=$service_id';
 
   static String subscription_paymentProvidernew(String token, String email, String password) =>
-      '$_baseUrl/bank/subscription-payment?token=jYPWm9gOMGISEXJtdsKvrsmq4XAaDYE4OJz7nnPcSwONpE7I6FbptiBldzo4&email=j$email&password=$password';
+      '$_baseUrl/subscription-payment?token=$token&email=j$email&password=$password';
 
   static String show_providerProfile(int i) =>'$_baseUrl/profiles/show/$i';
 
-  static String updateproviderProfile(int i) =>'$_baseUrl/profiles/update/$i';
+  static String updateproviderProfile(  int id, String name, String email,String address,String phone_number)
+                         =>//'http://192.168.43.31:8001/api/profiles/update/9?name=sadu&email=el22sr0@gmail.com&address=Saydnaya, Rif Dimashq&phone_number=0907122276';
+                             '$_baseUrl/profiles/update/$id?name=$name&email=$email&address=$address&phone_number=$phone_number';
+     // /update/9?name=amal7&email=eliasal2300@gmail.com&address=Saydnaya, Rif Dimashq&phone_number=0937798276
+      //'$_baseUrl/profiles/update/$i';
 
   static String destroyproviderProfile(int id) =>'$_baseUrl/profiles/destroy/$id';
 
@@ -64,6 +68,12 @@ class ApiConst {
 
 
   static String CancelReservationProviderMyServices(int id) => '$_baseUrl/refuse-request/$id';
+
+  static String approveReservationProviderMyServices(int id, String approved) =>'$_baseUrl/accept-request/$id?status=$approved';
+
+  static String deleteReservationFromProviderDetailsRequest(int id) => '$_baseUrl/refuse-request/$id';
+
+
 
 
 

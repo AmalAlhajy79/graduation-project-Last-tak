@@ -11,9 +11,10 @@ class DioNetworkHelper extends NetworkHelper{
 
   static Map<String,String> get _headers => {
     'Content-Type':'application/json',
-    'Accept':'application/json',//jYPWm9gOMGISEXJtdsKvrsmq4XAaDYE4OJz7nnPcSwONpE7I6FbptiBldzo4 // for prpvider
-                                  //V5LWTlttmXLIaMo91gjzXHPxZGBUDr0R5M4CxtBUjaKqcTWCTN1owwrGyDrc  //for user
-    'Authorization': 'Bearer 4gJ47RzNgaaMebIX8sdjqbLlGt8m7uhWMh0FrwiB0LZK9AfqdmeGeApDIb2Y'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8' //35Rr1OY6VD5imFy4ER0gwexui82UlE50eNGLwiehd9IfVjJUDHh1yWMh0Rgq'
+    'Accept':'application/json',//kYrje6eSKuRmhUGDNKKpgUn3pQKSjCbqOfn3pdwjcIeFbOk3fmhS68pYJRSz // for prpvider
+                                  //9KTERof8ELhYAiIghNqhhV5LZDuzJsYiIxh8Ul4EtnZpw7Q1g2aEEBRGRuw3  //for user1
+                                  // dUULKockrOky9xyqSrImWoKXgUojuj68EtNBsoNuCDkQs2QeWzEaS560U0ES //for user2
+    'Authorization': 'Bearer dUULKockrOky9xyqSrImWoKXgUojuj68EtNBsoNuCDkQs2QeWzEaS560U0ES'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8'//Jqezsk3ZzgG9aR8QGiAW6IiPsJ2JYtWOMetHKnORxQqQ5CZVmAcvgIFFfQv8' //35Rr1OY6VD5imFy4ER0gwexui82UlE50eNGLwiehd9IfVjJUDHh1yWMh0Rgq'
     //   if(StorageHandler().hasToken)
   //     'Authorization': 'Bearer ${StorageHandler().token}'
  };
